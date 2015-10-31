@@ -1,0 +1,18 @@
+﻿{
+  "version": "1.0.0-beta8",
+  "description": "Extension methods for supporting log4net on ASP.NET 5 (dnx451)",
+  "authors": [ "Armen Shimoon" ],
+  "tags": [ "log4net" ],
+  "projectUrl": "http://dotnetliberty.com",
+  "licenseUrl": "https://opensource.org/licenses/MIT",
+
+  "frameworks": {
+    "dnx451": {
+        "dependencies": {
+            "Microsoft.Dnx.Runtime":  "1.0.0-beta8",
+            "Microsoft.Framework.Logging": "1.0.0-beta8",
+            "log4net": "2.0.3"
+        }
+    }
+  }
+}
