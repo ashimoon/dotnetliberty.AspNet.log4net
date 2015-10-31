@@ -7,7 +7,7 @@ A couple of extension methods for adding log4net support to ASP.NET 5. This curr
 
 ## 1. Add a reference
 
-Inside of project.json, add a reference to dotnetliberty.AspNet.log4net:
+Inside of `project.json`, add a reference to `dotnetliberty.AspNet.log4net`:
 
 ```javascript
 {
@@ -23,7 +23,7 @@ Inside of project.json, add a reference to dotnetliberty.AspNet.log4net:
 
 ## 2. log4net XML Configuration
 
-With ASP.NET 5 we no longer have a web.config file. Instead we should create an XMLile at the root of our project that contains just our log4net configuration. For example:
+With ASP.NET 5 we no longer have a `web.config` file. Instead we should create an XML file at the root of our project that contains just our log4net configuration. For example:
 
 **Notice** that we are using a pattern for the file name. The value of the property `appRoot` is provided at runtime by this library.
 
@@ -48,7 +48,7 @@ With ASP.NET 5 we no longer have a web.config file. Instead we should create an 
 
 ## 3. Configure log4net at Startup
 
-Add an extra line in the Startup.cs constructor to tell it where to find the log4net XML file:
+Add an extra line in the `Startup.cs` constructor to tell it where to find the log4net XML file:
 
 ```csharp
 public class Startup
@@ -71,6 +71,8 @@ public class Startup
 
 ## 4. Register provider with ILoggerFactory
 
+Make a call to `loggerFactory.AddLog4Net` inside of the `Configure` method in `Startup.cs`.
+
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 {
@@ -84,7 +86,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
 ## 5. Done
 
-Now you will be able to use the Microsoft Logging framework throughout your application, and log4net will be used as a logging provider (based on the configuration provided in log4net.xml).
+Now you will be able to use the Microsoft Logging framework throughout your application, and log4net will be used as a logging provider (based on the configuration provided in `log4net.xml`).
 
 ```csharp
 var logger = loggerFactory.CreateLogger("Test");
