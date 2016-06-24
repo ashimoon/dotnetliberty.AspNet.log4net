@@ -1,6 +1,6 @@
 ﻿# Description
 
-A couple of extension methods for adding log4net support to ASP.NET 5. This currently only supports dnx451 (full .NET framework) as log4net does not have CoreCLR support yet.
+A couple of extension methods for adding log4net support to ASP.NET Core. This currently only supports net561 (full .NET framework) as log4net does not have Core CLR support yet.
 
 # Usage
 
@@ -23,7 +23,7 @@ Inside of `project.json`, add a reference to `dotnetliberty.AspNet.log4net`:
 
 ## 2. log4net XML Configuration
 
-With ASP.NET 5 we no longer have a `web.config` file. Instead we should create an XML file at the root of our project that contains just our log4net configuration. For example:
+With ASP.NET Core we no longer have a `web.config` file. Instead we should create an XML file at the root of our project that contains just our log4net configuration. For example:
 
 **Notice** that we are using a pattern for the file name. The value of the property `appRoot` is provided at runtime by this library.
 
@@ -53,7 +53,7 @@ Add an extra line in the `Startup.cs` constructor to tell it where to find the l
 ```csharp
 public class Startup
 {
-    public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+    public Startup(IHostingEnvironment env)
     {
         // Setup configuration sources.
 
@@ -62,7 +62,7 @@ public class Startup
             .AddJsonFile("appsettings.json")
             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-        appEnv.ConfigureLog4Net("log4net.xml");
+        env.ConfigureLog4Net("log4net.xml");
 
         // ...
     }

@@ -1,10 +1,10 @@
 ﻿using log4net;
-using Microsoft.Framework.Logging;
 using System;
+using Microsoft.Extensions.Logging;
 
-namespace dotnetliberty.AspNet.log4net
+namespace Log4net.Extensions.Logging
 {
-    public class Log4NetAdapter : ILogger
+    public class Log4NetAdapter : Microsoft.Extensions.Logging.ILogger
     {
         private ILog _logger;
 
@@ -18,11 +18,17 @@ namespace dotnetliberty.AspNet.log4net
             return null;
         }
 
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception,
+            Func<TState, Exception, string> formatter)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsEnabled(LogLevel logLevel)
         {
             switch (logLevel)
             {
-                case LogLevel.Verbose:
+                case LogLevel.Trace:
                 case LogLevel.Debug:
                     return _logger.IsDebugEnabled;
                 case LogLevel.Information:
@@ -33,29 +39,35 @@ namespace dotnetliberty.AspNet.log4net
                     return _logger.IsErrorEnabled;
                 case LogLevel.Critical:
                     return _logger.IsFatalEnabled;
+                case LogLevel.None:
+                    return false;
                 default:
                     throw new ArgumentException($"Unknown log level {logLevel}.", nameof(logLevel));
             }
         }
 
-        public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+        public IDisposable BeginScope<TState>(TState state)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Log(LogLevel logLevel, int eventId, object state, Exception exception,
+            Func<object, Exception, string> formatter)
         {
             if (!IsEnabled(logLevel))
             {
                 return;
             }
-            string message = null;
-            if (null != formatter)
+            if (formatter == null)
             {
-                message = formatter(state, exception);
+                throw new ArgumentNullException(nameof(formatter));
             }
-            else
-            {
-                message = LogFormatter.Formatter(state, exception);
-            }
+
+            var message = formatter(state, exception);
+
             switch (logLevel)
             {
-                case LogLevel.Verbose:
+                case LogLevel.Trace:
                 case LogLevel.Debug:
                     _logger.Debug(message, exception);
                     break;
@@ -70,6 +82,8 @@ namespace dotnetliberty.AspNet.log4net
                     break;
                 case LogLevel.Critical:
                     _logger.Fatal(message, exception);
+                    break;
+                case LogLevel.None:
                     break;
                 default:
                     _logger.Warn($"Encountered unknown log level {logLevel}, writing out as Info.");
