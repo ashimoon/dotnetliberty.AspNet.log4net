@@ -6,22 +6,11 @@ namespace Log4net.Extensions.Logging
 {
     public class Log4NetAdapter : Microsoft.Extensions.Logging.ILogger
     {
-        private ILog _logger;
+        private readonly ILog _logger;
 
         public Log4NetAdapter(string loggerName)
         {
             _logger = LogManager.GetLogger(loggerName);
-        }
-
-        public IDisposable BeginScopeImpl(object state)
-        {
-            return null;
-        }
-
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception,
-            Func<TState, Exception, string> formatter)
-        {
-            throw new NotImplementedException();
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -48,11 +37,11 @@ namespace Log4net.Extensions.Logging
 
         public IDisposable BeginScope<TState>(TState state)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
-        public void Log(LogLevel logLevel, int eventId, object state, Exception exception,
-            Func<object, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception,
+            Func<TState, Exception, string> formatter)
         {
             if (!IsEnabled(logLevel))
             {
