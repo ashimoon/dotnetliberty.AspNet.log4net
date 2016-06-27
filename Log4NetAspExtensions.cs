@@ -13,6 +13,13 @@ namespace Log4net.Extensions.Logging
             GlobalContext.Properties["appRoot"] = appEnv.ContentRootPath;
             XmlConfigurator.Configure(new FileInfo(Path.Combine(appEnv.ContentRootPath, configFileRelativePath)));
         }
+        
+        public static void ConfigureLog4Net(string configFileRelativePath)
+        {
+            var currentDir = Directory.GetCurrentDirectory(); // TODO: we will need to test this.
+            GlobalContext.Properties["appRoot"] = currentDir;
+            XmlConfigurator.Configure(new FileInfo(Path.Combine(currentDir, configFileRelativePath)));
+        }
 
         public static void AddLog4Net(this ILoggerFactory loggerFactory)
         {
