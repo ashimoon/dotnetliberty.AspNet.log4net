@@ -14,9 +14,8 @@ namespace Log4net.Extensions.Logging
             XmlConfigurator.Configure(new FileInfo(Path.Combine(appEnv.ContentRootPath, configFileRelativePath)));
         }
         
-        public static void ConfigureLog4Net(string configFileRelativePath)
+        public static void ConfigureLog4Net(string currentDir, string configFileRelativePath)
         {
-            var currentDir = Directory.GetCurrentDirectory(); // TODO: we will need to test this.
             GlobalContext.Properties["appRoot"] = currentDir;
             XmlConfigurator.Configure(new FileInfo(Path.Combine(currentDir, configFileRelativePath)));
         }
