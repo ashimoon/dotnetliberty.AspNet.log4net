@@ -9,14 +9,22 @@
   },
 
   "frameworks": {
-    "net461": {
+    "net462": {
       "dependencies": {
         "log4net": "2.0.3"
       },
       "frameworkAssemblies": {
         "System.Xml": "4.0.0.0"
       }
-    }    
+    },
+    "net452": {
+      "dependencies": {
+        "log4net": "2.0.3"
+      },
+      "frameworkAssemblies": {
+        "System.Xml": "4.0.0.0"
+      }
+    }
   },
   "dependencies": {
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0-rc2-final",
