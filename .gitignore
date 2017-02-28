@@ -3,3 +3,7 @@
 *.exe
 *.user
 project.lock.json
+bin/
+obj/
+_ReSharper.*
+.vs/

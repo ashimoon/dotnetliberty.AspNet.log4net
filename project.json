@@ -1,18 +1,33 @@
 ﻿{
-  "version": "1.0.0-beta8",
-  "description": "Extension methods for supporting log4net on ASP.NET 5 (dnx451)",
-  "authors": [ "Armen Shimoon" ],
-  "tags": [ "log4net" ],
-  "projectUrl": "http://dotnetliberty.com",
-  "licenseUrl": "https://opensource.org/licenses/MIT",
+  "version": "1.0.0-rc1",
+  "description": "Extension methods for supporting log4net on ASP.NET core (net461)",
+  "authors": [ "Armen Shimoon", "Manish Pratap singh" ],
+  "packOptions": {
+    "projectUrl": "http://dotnetliberty.com",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "tags": [ "log4net" ]
+  },
 
   "frameworks": {
-    "dnx451": {
-        "dependencies": {
-            "Microsoft.Dnx.Runtime":  "1.0.0-beta8",
-            "Microsoft.Framework.Logging": "1.0.0-beta8",
-            "log4net": "2.0.3"
-        }
+    "net462": {
+      "dependencies": {
+        "log4net": "2.0.3"
+      },
+      "frameworkAssemblies": {
+        "System.Xml": "4.0.0.0"
+      }
+    },
+    "net452": {
+      "dependencies": {
+        "log4net": "2.0.3"
+      },
+      "frameworkAssemblies": {
+        "System.Xml": "4.0.0.0"
+      }
     }
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-final"
   }
 }

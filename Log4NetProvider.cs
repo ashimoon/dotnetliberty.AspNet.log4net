@@ -1,7 +1,7 @@
-﻿using Microsoft.Framework.Logging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
-namespace dotnetliberty.AspNet.log4net
+namespace Log4net.Extensions.Logging
 {
     public class Log4NetProvider : ILoggerProvider
     {
